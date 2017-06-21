@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Instagram Location</title>
+        <link href="index.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    </head>
+    <body>
+      <main>
+        <div class="container-left">
+          <h1>INSTAGRAM POSTS BY LOCATION</h1>
+          <div class="page-description">
+           Click the map to set a marker, use <em>Radius</em> to set the search radius, and then click <em>Search</em> to find posts.
+           </div>
+          
+          <form action="#" class="js-search-form">
+            <div class="map-container">
+              <div id="map"></div>
+            </div>
+            <div class="textfield-group">
+              <input type="text" class="js-lat" maxlength="100" placeholder="Latitude" value=""><br>
+              <span class="bar"></span>
+              <label for="js-lat"></label>
+            </div>
+            <div class="textfield-group">
+              <input type="text" class="js-lng" maxlength="100" placeholder="Longitude" value="">
+              <span class="bar"></span>
+              <label for="js-lng"></label>
+            </div>
+            <div class="textfield-group radius">
+              <input type="range" id="radius" class="js-radius" min="1600" max="5000" step="100" placeholder="Radius" value="5000" oninput="radiusUpdate(this.value)">
+              <label for="radius">Radius: <output for="radius" id="js-radius-val">3</output>mi</label>
+            </div>
+             <button type="submit" class="search-button" disabled="true">Search</button>
+          </form>
+        </div>
+        <div class="container-right">
+          <div class="js-result-count"></div>
+          <div class="js-search-results"></div>
+        </div>
+        <p class="sloan"</p><a href="http://www.sloanstewart.io/">sloanstewart.io</a></p>
+      </main>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQ40uqDWb1VjfXltRTNKW9YGicS6J38yk&callback=initMap"
+    async defer></script>
+    <script src="index.js"></script>
+    </body>
+</html>
