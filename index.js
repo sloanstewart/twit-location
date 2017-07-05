@@ -1,4 +1,7 @@
 /* global $ */ // Make Cloud9 happy about jquery junk.
+/* global hello */
+
+
 
 // GOOGLE MAP MAGIC!
 // Note: This example requires that you consent to location sharing when
@@ -237,14 +240,14 @@ function radiusUpdate(val) { // Displays radius value as miles
 	radius.setRadius(Number(val));
 }
 
-var API_URL = 'https://api.instagram.com/v1/media/search';
+var API_URL = 'https://api.twitter.com/1.1/search/tweets.json';
 var RESULT_HTML_TEMPLATE = (
   '<div class="result">' +
   	'<div class="js-user-info">' +
   		'<a class="js-profile-picture" href="" target="_blank"></a>' +
   		'<div class="js-user-details">' +
       		'<a class="js-username" href="" target="_blank"></a><br>' +
-      	    '<a class="js-location" href="" target="_blank"></a>' +
+      	    '<a class="js-screenname" href="" target="_blank"></a>' +
   	    '</div>' +
     '</div>' +
     '<div class="js-image" href="" target="_blank"></div>' +
@@ -256,53 +259,99 @@ var RESULT_HTML_TEMPLATE = (
   '</div>'
 );
 
+// HELLO.JS 
+  hello.init({
+  	'twitter' : 'mCvOiCxSuf98M1PKd167jLi9y'
+  },
+  {
+  	redirect_uri:'../redirect.html',
+  	oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
+  });
+
+function login(network){
+  console.log('Logging in...');
+  // Twitter instance
+  var twitter = hello(network);
+  // Login
+  twitter.login().then( function(r){
+  	// Get Profile
+  	return twitter.api('me');
+  }, log )
+  .then( function(p){
+  	// Put in page
+  	document.getElementById('login').innerHTML = "<img src='"+ p.thumbnail + "' width=50/><br>Logged in as " + p.name;
+  	console.log('Login Successful');
+  }, log );
+  	
+  // .then( function(x){
+  //   let list = []; // define array
+  // 	x.statuses.forEach(function(t){ // loop through each item
+  // 	  let data = {
+  // 	    timestamp: t.created_at,
+  // 	    user: t.user.screen_name,
+  // 	    text: t.text,
+  // 	  };
+  // 	  const html = `
+  // 	    <div class="tweet" style="background: #fff; margin: 1em; padding: 1em; border: 1px solid black;">
+  // 	    <h4>${data.text}</h4>
+  // 	    <p>${data.user} | ${data.timestamp}</p>
+  // 	    </div>
+  // 	  `;
+  // 	  list.push(html); // push tweet html to array
+  // 	});
+  // 	list.forEach(function(i){ // display data from each tweet in array
+  // 	  console.log('data rendered');
+  // 	  $('#test').append(i);
+  // 	});
+  // }, log );
+}
+
+function log(){
+      		console.log(arguments);
+      	}
+// leaving HELLO.JS  
+
 function getDataFromApi(lat, lng, rad, callback) {
   var query = {
-    lat: lat,
-    lng: lng,
-    distance: rad,
-    access_token: '5574247135.de4dc3c.19d7fe308e5145c4b2a9d83c233c3242',
-    scope: 'public_content'
+    q: '',
+    geocode: lat+','+lng+','+rad+'km',
+    result_type: 'recent',
+    count: 5 // Default is 15
   };
-  $.ajax({
-	  dataType: "jsonp", //must do this for the Instagram API to work via client side
-	  url: API_URL,
-	  data: query,
-	  success: callback
-	});
+  var queryString = 'q='+query.q+'&geocode='+query.geocode+'&count='+query.count;
+  // console.log(query); // works
+  console.log('Requesting: '+queryString);
+  // hello.api([path], [method], [data], [callback(json)]).then(successHandler, errorHandler)
+  
+  // hello('twitter').api('search/tweets.json?q=javascript&geocode=33.7400000,-84.3900000,5000km&count=5').then(callback);
+  hello('twitter').api('search/tweets.json', "get", query).then(callback);
 }
 
 function renderResult(result) {
     var template = $(RESULT_HTML_TEMPLATE);
-    var date = new Date(parseInt(result.created_time, 10)*1000);
-    template.find(".js-profile-picture").html('<img class="profile-thumbnail" src='+result.user.profile_picture+'>').attr("href", 'https://www.instagram.com/'+result.user.username);
-    template.find(".js-username").text(result.user.username).attr("href", 'https://www.instagram.com/'+result.user.username);
-    template.find(".js-location").text(result.location.name).attr("href", 'https://www.instagram.com/explore/locations/'+result.location.id);
-	if (result.type === 'video'){
-		template.find(".js-image").html("<video controls loop class=video width=100% type=video/mp4 poster='"+result.images.standard_resolution.url+"' src='"+result.videos.standard_resolution.url+"'></video>");
-	}
-	else {
-		template.find(".js-image").html('<a href="'+result.link+'" target="_blank"><img src="'+result.images.standard_resolution.url+'"></a>');
-	}
-    if (result.caption != null){
-      template.find(".js-description").text(result.caption.text);
+    var time = result.created_at;
+    console.log(time);
+    // var date = new Date(parseInt(time, 10)*1000);
+    template.find(".js-profile-picture").html('<img class="profile-thumbnail" src='+result.user.profile_image_url_https+'>').attr("href", 'https://www.twitter.com/'+result.user.screen_name);
+    template.find(".js-username").text(result.user.name).attr("href", 'https://www.twitter.com/'+result.user.screen_name);
+    template.find(".js-screenname").text(result.user.screen_name);
+    if (result.text != null){
+      template.find(".js-description").text(result.text);
     }
-    template.find(".js-likes").text(result.likes.count+' Likes');
-    template.find(".js-date").text((date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear());
+    template.find(".js-date").text(time)
   return template;
 }
 
 function displayData(data) {
-	if (data.data.length !== 0){
+	if (data.statuses.length !== 0){
 		console.log('API RESPONSE: \n');
 		console.dir(data);
 		// display count of posts found
-		$(".js-result-count").text(data.data.length+' posts found');
-		var results = data.data.map(function(item, index) {
+		// $(".js-result-count").text(data.statuses.length+' posts found');
+		var results = data.statuses.map(function(item, index) {
 				return renderResult(item);
 		});
 		$('.js-search-results').append(results);
-		$('.video').click(function(){this.paused?this.play():this.pause();});
 	}
 	else {
 		console.error('No good data found!');
@@ -326,6 +375,13 @@ function changeLayout() {
 }
 
 function watchButtons() {
+  $('#login').click(function(e){
+    e.preventDefault();
+    login('twitter');
+  });
+  $('#get-tweets').click(function(e){
+    getDataFromApi('33.7400000','-84.3900000','5000', renderResult);
+  });
   $('.js-search-form').submit(function(event) {
     event.preventDefault();
     $(".js-result-count, .js-search-results").empty(); // Clear count text and results
@@ -333,9 +389,6 @@ function watchButtons() {
     var lng = $('.js-lng').val();
     var rad = $('.js-radius').val();
     getDataFromApi(lat, lng, rad, displayData);
-    
-    // If screen is large, move map to the left and results to the right
-    // changeLayout();
     
     // Scroll to results
 		$('html, body').animate({

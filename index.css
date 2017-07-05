@@ -231,7 +231,6 @@ button:disabled {
 }
 
 .result-info p {
-	padding: 0;
 	margin: 0;
 }
 .result-date {
@@ -259,7 +258,7 @@ button:disabled {
 }
 
 .profile-thumbnail {
-	width: 2.8em;
+	width: 48px;
 	border-radius: 50%;
 }
 
@@ -272,8 +271,12 @@ button:disabled {
 	font-weight: bold;
 }
 
-.js-location{
-	font-weight: 100;
+.js-screenname {
+	color: #657786;
+}
+
+.js-description{
+	padding-bottom: 1em;
 }
 
 .sloan {

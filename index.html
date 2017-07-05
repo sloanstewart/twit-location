@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Instagram Location</title>
-        <link href="index.css" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Locate Tweets</title>
+      <link href="index.css" rel="stylesheet" type="text/css" />
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+      <!-- Hello.js with Twitter module -->
+      <script src="../src/hello.polyfill.js"></script>
+      <script src="../src/hello.js"></script>
+      <script src="../src/modules/twitter.js"></script>
     </head>
     <body>
       <main>
         <div class="container-left">
-          <h1>INSTAGRAM POSTS BY LOCATION</h1>
+          
+          <h1>Locate Them Tweets!</h1>
           <div class="page-description">
-           Click the map to set a marker, use <em>Radius</em> to set the search radius, and then click <em>Search</em> to find posts.
-           </div>
+           Click the map to set a marker, use <em>Radius</em> to set the search radius, and then click <em>Search</em> to find some dang tweets!
+          </div>
+          <!-- Login to Twitter with Hello.js -->
+          <button id='login'>Login with Twitter</button>
           
           <form action="#" class="js-search-form">
             <div class="map-container">
@@ -30,8 +37,8 @@
               <label for="js-lng"></label>
             </div>
             <div class="textfield-group radius">
-              <input type="range" id="radius" class="js-radius" min="1600" max="5000" step="100" placeholder="Radius" value="5000" oninput="radiusUpdate(this.value)">
-              <label for="radius">Radius: <output for="radius" id="js-radius-val">3</output>mi</label>
+              <input type="range" id="radius" class="js-radius" min="1340" max="40233" step="1340" value="1340" oninput="radiusUpdate(this.value)">
+              <label for="radius">Radius: <output for="radius" id="js-radius-val">1</output>mi</label>
             </div>
              <button type="submit" class="search-button" disabled="true">Search</button>
           </form>
@@ -45,6 +52,10 @@
       <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQ40uqDWb1VjfXltRTNKW9YGicS6J38yk&callback=initMap"
     async defer></script>
-    <script src="index.js"></script>
-    </body>
+      <script src="index.js"></script>
+      <script>
+      	
+      </script>
+      
+      </body>
 </html>
