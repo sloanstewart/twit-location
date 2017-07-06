@@ -264,7 +264,7 @@ var RESULT_HTML_TEMPLATE = (
   	'twitter' : 'mCvOiCxSuf98M1PKd167jLi9y'
   },
   {
-  	redirect_uri:'redirect.html',
+  	redirect_uri:'./redirect.html',
   	oauth_proxy: 'https://auth-server.herokuapp.com/proxy'
   });
 
