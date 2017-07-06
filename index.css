@@ -275,7 +275,12 @@ button:disabled {
 	color: #657786;
 }
 
-.js-description{
+.js-tweet-link, .js-tweet-link:hover, .js-tweet-link:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+.js-text{
 	padding-bottom: 1em;
 }
 

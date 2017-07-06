@@ -220,7 +220,7 @@ function initMap() {
           radius: Number($('.js-radius').val())
        });
        radius.bindTo("center", marker, "position"); // Radius is bound to Marker
-       console.log(radius.radius);
+       console.log('Radius (km): '+radius.radius);
   }
     
   function setCoords () {
@@ -253,7 +253,7 @@ var RESULT_HTML_TEMPLATE = (
     '<div class="js-image" href="" target="_blank"></div>' +
     '<div class="result-info">' +
         '<p class="js-likes"></p>' +
-    	'<p class="js-description"></p>' +
+    	'<a class="js-tweet-link" href="" target="_blank"><p class="js-text"></p></a>' +
     	'<p class="result-date"><span class="js-date"></span></p>' +
     '</div>' +
   '</div>'
@@ -282,28 +282,6 @@ function login(network){
   	document.getElementById('login').innerHTML = "<img src='"+ p.thumbnail + "' width=50/><br>Logged in as " + p.name;
   	console.log('Login Successful');
   }, log );
-  	
-  // .then( function(x){
-  //   let list = []; // define array
-  // 	x.statuses.forEach(function(t){ // loop through each item
-  // 	  let data = {
-  // 	    timestamp: t.created_at,
-  // 	    user: t.user.screen_name,
-  // 	    text: t.text,
-  // 	  };
-  // 	  const html = `
-  // 	    <div class="tweet" style="background: #fff; margin: 1em; padding: 1em; border: 1px solid black;">
-  // 	    <h4>${data.text}</h4>
-  // 	    <p>${data.user} | ${data.timestamp}</p>
-  // 	    </div>
-  // 	  `;
-  // 	  list.push(html); // push tweet html to array
-  // 	});
-  // 	list.forEach(function(i){ // display data from each tweet in array
-  // 	  console.log('data rendered');
-  // 	  $('#test').append(i);
-  // 	});
-  // }, log );
 }
 
 function log(){
@@ -316,62 +294,37 @@ function getDataFromApi(lat, lng, rad, callback) {
     q: '',
     geocode: lat+','+lng+','+rad+'km',
     result_type: 'recent',
-    count: 5 // Default is 15
+    count: 100 // Default is 15
   };
-  var queryString = 'q='+query.q+'&geocode='+query.geocode+'&count='+query.count;
-  // console.log(query); // works
-  console.log('Requesting: '+queryString);
-  // hello.api([path], [method], [data], [callback(json)]).then(successHandler, errorHandler)
-  
-  // hello('twitter').api('search/tweets.json?q=javascript&geocode=33.7400000,-84.3900000,5000km&count=5').then(callback);
+  // var queryString = 'q='+query.q+'&geocode='+query.geocode+'&count='+query.count;
+  // console.log('Requesting: '+queryString);
   hello('twitter').api('search/tweets.json', "get", query).then(callback);
 }
 
-function renderResult(result) {
-    var template = $(RESULT_HTML_TEMPLATE);
-    var time = result.created_at;
-    console.log(time);
-    // var date = new Date(parseInt(time, 10)*1000);
-    template.find(".js-profile-picture").html('<img class="profile-thumbnail" src='+result.user.profile_image_url_https+'>').attr("href", 'https://www.twitter.com/'+result.user.screen_name);
-    template.find(".js-username").text(result.user.name).attr("href", 'https://www.twitter.com/'+result.user.screen_name);
-    template.find(".js-screenname").text(result.user.screen_name);
-    if (result.text != null){
-      template.find(".js-description").text(result.text);
-    }
-    template.find(".js-date").text(time)
+function renderResult(result, index) {
+  var template = $(RESULT_HTML_TEMPLATE);
+  var url = 'https://www.twitter.com/'+result.user.screen_name;
+  var tweetUrl = url+'/status/'+result.id_str;
+  template.find(".js-profile-picture").html('<img class="profile-thumbnail" src='+result.user.profile_image_url_https+'>').attr("href", url);
+  template.find(".js-username").text(result.user.name).attr("href", url);
+  template.find(".js-screenname").text('@'+result.user.screen_name).attr("href", url);
+  template.find(".js-text").text(result.text).attr("href", tweetUrl);
+  template.find(".js-tweet-link").attr("href", tweetUrl);
+  template.find(".js-date").text(result.created_at);
   return template;
 }
 
 function displayData(data) {
-	if (data.statuses.length !== 0){
-		console.log('API RESPONSE: \n');
-		console.dir(data);
+  console.log(data.statuses.length+' tweets found');
+	var results = data.statuses.map(function(item) {
+	  return renderResult(item);
+	  });
+	$('.js-search-results').append(results);
+	
+	if (data.statuses.length === 0){
 		// display count of posts found
-		// $(".js-result-count").text(data.statuses.length+' posts found');
-		var results = data.statuses.map(function(item, index) {
-				return renderResult(item);
-		});
-		$('.js-search-results').append(results);
+		$(".js-result-count").text(data.statuses.length+' tweets found');
 	}
-	else {
-		console.error('No good data found!');
-		$(".js-result-count").text('No posts found in specified area.');
-	}
-}
-
-function changeLayout() {
-  console.log('changing layout');
-  // If screen is large, move map to the left and results to the right
-  if (document.body.clientWidth >= 1024) {
-  	$('main').addClass('main-large');
-  	$('.container-left').addClass('container-left-large');
-  	$('.container-right').addClass('container-right-large');
-  }
-  else if (document.body.clientWidth < 1024){
-    $('main').removeClass('main-large');
-  	$('.container-left').removeClass('container-left-large');
-  	$('.container-right').removeClass('container-right-large');
-  }
 }
 
 function watchButtons() {
