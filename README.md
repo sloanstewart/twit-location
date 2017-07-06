@@ -8,4 +8,4 @@ Search for posts on *Twitter* based on a location selected via *Google Maps*.
 * Artisanal, hand-crafted *HTML*, *CSS*, and *JavaScript* with a dash of *jQuery*.
 
 ## Imagery
-
+![mockup image](mockup500x500.jpg "Wow, ain't it pretty?")
