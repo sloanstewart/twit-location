@@ -1,0 +1,102 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "Locate Tweets",
+    "scope": "/twit-location/",
+    "display": "minimal-ui",
+    "start_url": "https://sloanstewart.io/twit-location/",
+    "short_name": "locatetweets",
+    "theme_color": "transparent",
+    "description": "Locate tweets near specified location.",
+    "orientation": "any",
+    "background_color": "transparent",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/images/ec8d7fce-7ee8-12a2-08a3-43a135029ae7.webPlatform.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/9796bfeb-5541-5c29-4282-d6e5aa05cfa8.webPlatform.png",
+            "sizes": "1240x600",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/7c1dedd7-8020-d406-a821-06cb5be4987f.webPlatform.png",
+            "sizes": "300x300",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/ebd3c786-30b1-c870-30ee-dac590b70ff9.webPlatform.png",
+            "sizes": "88x88",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/0613cb14-f35e-8f98-06d4-aa1e7f66b5a8.webPlatform.png",
+            "sizes": "24x24",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/3adf9c09-8c02-44bf-7778-0cbd76524ca1.webPlatform.png",
+            "sizes": "50x50",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/45d4d220-68e7-e4c1-6dbd-516406535f52.webPlatform.png",
+            "sizes": "620x300",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/3f9c251f-fb29-7774-891b-6a869e14e097.webPlatform.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/44c2671b-76c9-5eaf-2cd4-5adb39cb4404.webPlatform.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/cb9ecb0a-1ad4-3128-3262-2f1dc5f4e0bd.webPlatform.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/e90aafd6-73b6-7ce9-db4a-4fe1a67a68d7.webPlatform.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/317a8a15-fbb5-da9b-4369-8b028f4ce963.webPlatform.png",
+            "sizes": "36x36",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/4de6f4f8-d828-2aa8-e7a1-026c5a8e5479.webPlatform.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/b78a5cb7-e7b2-29aa-e840-fd13edbb60c6.webPlatform.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/ea6943a7-8509-6dd5-1f25-1f74eb352238.webPlatform.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/398279eb-0c92-32eb-ead8-b1bcbf851444.webPlatform.png",
+            "sizes": "120x120",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/b0225c1a-bd89-dc77-142a-c3b9709ac551.webPlatform.png",
+            "sizes": "76x76",
+            "type": "image/png"
+        }
+    ]
+}
