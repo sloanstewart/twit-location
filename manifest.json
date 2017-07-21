@@ -6,7 +6,7 @@
     "display": "minimal-ui",
     "start_url": "https://sloanstewart.io/twit-location/",
     "short_name": "locatetweets",
-    "theme_color": "transparent",
+    "theme_color": "#fafafa",
     "description": "Locate tweets near specified location.",
     "orientation": "any",
     "background_color": "transparent",
