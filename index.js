@@ -12,9 +12,7 @@ var map;
 var marker = null;
 var radius = null;
 function initMap() {
-    
   map = new google.maps.Map(document.getElementById('map'), {
-    // TODO: get user's geolocation for centering map!
     center: {lat: 33.7700000, lng: -84.3500000}, // Should be close to the center of the universe, er...Atlanta.
     zoom: 10,
     styles:[
@@ -179,6 +177,22 @@ function initMap() {
     ]
   });
   infoWindow = new google.maps.InfoWindow;
+   
+    // TODO: get user's geolocation for centering map!
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        map.setCenter(pos);
+      }, function() {
+        handleLocationError(true, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      alert('Cannot determine your location.');
+    }
    
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event) {
