@@ -291,13 +291,13 @@ function log(){
 
 function getDataFromApi(lat, lng, rad, callback) {
   var query = {
-    q: '',
+    q: '', // query is required
     geocode: lat+','+lng+','+rad+'km',
     result_type: 'recent',
     count: 100 // Default is 15
   };
   // var queryString = 'q='+query.q+'&geocode='+query.geocode+'&count='+query.count;
-  // console.log('Requesting: '+queryString);
+  console.log('Requesting: '+query);
   hello('twitter').api('search/tweets.json', "get", query).then(callback);
 }
 
