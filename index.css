@@ -302,32 +302,26 @@ button:disabled {
 		padding: 2rem;
 	}
 	
-	.container-left-large {
-		position: fixed;
-		float: left;
-		max-width: 33.3%;
-		max-height: 95vh;
-		padding: 1rem;
-		background: #fafafa;
-		overflow: scroll;
-	}
-	
-	.container-right-large {
-		text-align: center;
-		float: right;
-		width: 65%;
-		padding: 1em;
-		overflow: visible;
+	.container {
+		max-width: 960px;
+    width: 100%;
+    margin: auto;
 	}
 
 @media screen and (min-width: 2048px){
 	body{
 		font-size: 2rem;
 	}
+	.container {
+		max-width: 1024px;
+	}
 }
 
 @media screen and (min-width: 3840px){
 	body{
 		font-size: 3rem;
+	}
+	.container {
+		max-width: 2048px;
 	}
 }
