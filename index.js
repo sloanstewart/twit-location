@@ -238,7 +238,8 @@ function initMap() {
 function radiusUpdate(val) { // Displays radius value as miles
   // calc meters into miles
 // 	var miles = Math.round(val * 0.000621371);
-	var miles = Math.round(val * 1609.34);
+// 	var miles = Math.round(val * 1609.34);
+	var miles = val;
 	$('#js-radius-val').val(miles);
 	radius.setRadius(Number(val));
 }
