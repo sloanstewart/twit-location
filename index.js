@@ -344,10 +344,11 @@ function watchButtons() {
   $('.js-search-form').submit(function(event) {
     event.preventDefault();
     $(".js-result-count, .js-search-results").empty(); // Clear count text and results
+    var miles = Math.round($('.js-radius').val() * 0.000621371);
     var q = $('.js-q').val();
     var lat = $('.js-lat').val();
     var lng = $('.js-lng').val();
-    var rad = $('.js-radius').val();
+    var rad = miles;
     getDataFromApi(q, lat, lng, rad, displayData);
     
     // Scroll to results
