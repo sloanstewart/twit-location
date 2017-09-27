@@ -14,6 +14,7 @@ var radius = null;
 function initMap() {
     
   map = new google.maps.Map(document.getElementById('map'), {
+    // TODO: get user's geolocation for centering map!
     center: {lat: 33.7700000, lng: -84.3500000}, // Should be close to the center of the universe, er...Atlanta.
     zoom: 10,
     styles:[
@@ -235,7 +236,9 @@ function initMap() {
 // NOW LEAVING GOOGLE MAP MAGIC!
 
 function radiusUpdate(val) { // Displays radius value as miles
-	var miles = Math.round(val * 0.000621371); // one mile in meters
+  // calc meters into miles
+// 	var miles = Math.round(val * 0.000621371);
+	var miles = Math.round(val * 1609.34);
 	$('#js-radius-val').val(miles);
 	radius.setRadius(Number(val));
 }
