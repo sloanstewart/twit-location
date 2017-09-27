@@ -237,9 +237,9 @@ function initMap() {
 
 function radiusUpdate(val) { // Displays radius value as miles
   // calc meters into miles
-// 	var miles = Math.round(val * 0.000621371);
+	var miles = Math.round(val * 0.000621371);
 // 	var miles = Math.round(val * 1609.34);
-	var miles = val;
+// 	var miles = val;
 	$('#js-radius-val').val(miles);
 	radius.setRadius(Number(val));
 }
@@ -296,7 +296,7 @@ function log(){
 function getDataFromApi(q, lat, lng, rad, callback) {
   var query = {
     q: q, // query is required
-    geocode: lat + ',' + lng + ',' + rad + 'km',
+    geocode: lat + ',' + lng + ',' + rad + 'm',
     // geocode: '33.7800000,-84.2700000,5mi', // this works
     result_type: 'recent',
     count: 100 // Default is 15
