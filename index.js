@@ -289,9 +289,9 @@ function log(){
       	}
 // leaving HELLO.JS  
 
-function getDataFromApi(lat, lng, rad, callback) {
+function getDataFromApi(q, lat, lng, rad, callback) {
   var query = {
-    q: '\"\"', // query is required
+    q: q, // query is required
     geocode: lat + ',' + lng + ',' + rad + 'km',
     // geocode: '33.7800000,-84.2700000,5mi', // this works
     result_type: 'recent',
@@ -340,10 +340,11 @@ function watchButtons() {
   $('.js-search-form').submit(function(event) {
     event.preventDefault();
     $(".js-result-count, .js-search-results").empty(); // Clear count text and results
+    var q = $('.js-q').val();
     var lat = $('.js-lat').val();
     var lng = $('.js-lng').val();
     var rad = $('.js-radius').val();
-    getDataFromApi(lat, lng, rad, displayData);
+    getDataFromApi(q, lat, lng, rad, displayData);
     
     // Scroll to results
 		$('html, body').animate({
