@@ -297,7 +297,8 @@ function getDataFromApi(lat, lng, rad, callback) {
     count: 100 // Default is 15
   };
   // var queryString = 'q='+query.q+'&geocode='+query.geocode+'&count='+query.count;
-  console.log('Requesting: '+query);
+  var queryStr = JSON.stringify(query);
+  console.log(queryStr);
   hello('twitter').api('search/tweets.json', "get", query).then(callback);
 }
 
