@@ -292,7 +292,8 @@ function log(){
 function getDataFromApi(lat, lng, rad, callback) {
   var query = {
     q: '', // query is required
-    geocode: lat+','+lng+','+rad+'km',
+    // geocode: lat+','+lng+','+rad+'km',
+    geocode: lat+'&'+lng+'&'+rad+'km',
     result_type: 'recent',
     count: 100 // Default is 15
   };
