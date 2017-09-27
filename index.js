@@ -291,7 +291,7 @@ function log(){
 
 function getDataFromApi(lat, lng, rad, callback) {
   var query = {
-    q: 'trap', // query is required
+    q: '', // query is required
     // geocode: lat+','+lng+','+rad+'km',
     geocode: '33.7800000,-84.2700000,1km',
     result_type: 'recent',
